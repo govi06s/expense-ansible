@@ -10,6 +10,12 @@
       state: present
       enabled: yes
 
+  - name: start the MYSQL server
+    ansible.builtin.services:
+      name: mysqld
+      state: started
+      enabled: yes
+
   - name: connect to mysql server
     community.mysql.mysql_info:
       login_user: root

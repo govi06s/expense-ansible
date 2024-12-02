@@ -10,15 +10,18 @@
       name:
       - PyMySQL
       executable: pip3.9
-      
+
   - name: disable the default nodejs
     ansible.builtin.command: dnf module disable nodejs -y
   - name: enable nodejs 20
     ansible.builtin.command: dnf module enable nodejs:20 -y
   - name: install the nodejs
     ansible.builtin.package:
-      name: nodejs
+      name: "{{ item }}"
       state: present
+    loop:
+    - nodejs
+    - mysql
   
   - name: create the expense user
     ansible.builtin.user:

@@ -30,3 +30,13 @@
       src: /tmp/backend.zip #by default ansible thinks this in ansible server
       dest: /app
       remote_src: yes
+
+  - name: install the dependencies
+    ansible.builtin.command: npm install
+    args:
+      chdir: /app
+
+  - name: copy backend service
+    ansible.builtin.copy:
+      src: backend.service
+      dest: /etc/systemd/system/backend.service
